@@ -8,8 +8,6 @@ export function auth(email, password, isLogin) {
             returnSecureToken: true
         }
 
-        console.log(process.env.REACT_APP_API_KEY)
-
         const API_KEY = process.env.REACT_APP_API_KEY
 
         let url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`
