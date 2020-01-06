@@ -1,7 +1,6 @@
 import axios from 'axios'
 import { AUTH_SUCCESS, AUTH_LOGOUT } from './actionTypes'
 
-
 export function auth(email, password, isLogin) {
     return async dispatch => {
         const authData = {
@@ -9,10 +8,14 @@ export function auth(email, password, isLogin) {
             returnSecureToken: true
         }
 
-        let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDjYrWmjENv2j93B7d-0tJC2vSt0FwBqco'
+        console.log(process.env.REACT_APP_API_KEY)
+
+        const API_KEY = process.env.REACT_APP_API_KEY
+
+        let url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`
 
         if (isLogin) {
-            url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDjYrWmjENv2j93B7d-0tJC2vSt0FwBqco'
+            url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`
         }
         const response = await axios.post(url, authData)
         const data = response.data
